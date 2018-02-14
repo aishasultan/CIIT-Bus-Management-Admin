@@ -1,0 +1,52 @@
+﻿@model testing.Models.AdminManageModels.Driver
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<script src="~/js/site.js"></script>
+
+<div>
+    <h4>Driver</h4>
+    <hr />
+    
+       
+            <div class="col-md-6">
+                <ul id="list" class="list-group"></ul>
+                
+                <script>
+                   
+                    //dbRef.on("child_added", function (snap) {
+                    //    console.log("added", snap.key(), snap.val());
+                    //    document.innerHTML += driverHtmlFromObject(snap.val());
+                    //});
+                    
+
+                    ////prepare conatct object's HTML
+                    //function driverHtmlFromObject(driver) {
+                    //    console.log(driver);
+                    //    var html = '';
+                    //    html += '<li class="list-group-item driver">';
+                    //    html += '<div>';
+                    //    html += '<p class="lead">' + driver.name + '</p>';
+                    //    html += '<p>' + driver.email + '</p>';
+                    //    html += '<p><small title="' + driver.location.zip + '">'
+                    //        + driver.location.city + ', '
+                    //        + driver.location.state + '</small></p>';
+                    //    html += '</div>';
+                    //    html += '</li>';
+                    //    return html;
+                    //}
+
+                   
+
+                </script>
+
+            </div>
+</div>
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@
