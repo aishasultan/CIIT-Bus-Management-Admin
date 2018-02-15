@@ -33,12 +33,12 @@ var dbRef3 = firebase.database().ref().child('Feedback');
 
 
 //Sync List changes
-//dbList.on('child_added', snap => {
-//    var li = document.createElement('li');
-//    li.innerText = snap.val();
-//    li.id = snap.key;
-//    list.appendChild(li);
-//});
+dbList.on('child_added', snap => {
+    var li = document.createElement('li');
+    li.innerText = snap.val();
+    li.id = snap.key;
+    list.appendChild(li);
+});
 
 //dbList.on('child_changed', snap => {
 

@@ -1,34 +1,99 @@
 ﻿@model testing.Models.AdminManageModels.Driver
-
 @{
     ViewData["Title"] = "Edit";
 }
-
 <h2>Edit</h2>
-
 <h4>Driver</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create" id="myform">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" id="name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" id="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" id="ph" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusNumber" class="control-label"></label>
+                <input asp-for="BusNumber" id="bus" class="form-control" />
+                <span asp-validation-for="BusNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" id="submit" value="Create" class="btn btn-default" onclick="click" />
             </div>
         </form>
+
+        <script>
+            document.getElementById('submit')
+                .addEventListener("click", function writeUserData(name, email, bus, ph) {
+                    firebase.database().ref('Driver/' + ID).set({
+                        Name: name,
+                        Email: email,
+                        BusNumber: bus,
+                        PhoneNumber: ph
+                    });
+                }, false)
+
+            var config = {
+                apiKey: "AIzaSyDJKWHkRz5w0a0OQ8EJI1woyrzv2Y8sSxE",
+                authDomain: "final-year-project-188517.firebaseapp.com",
+                databaseURL: "https://final-year-project-188517.firebaseio.com",
+                projectId: "final-year-project-188517",
+                storageBucket: "final-year-project-188517.appspot.com",
+                messagingSenderId: "414362957154"
+            };
+            firebase.initializeApp(config);
+
+            var dbRef = firebase.database().ref().child('Driver');
+
+
+            dbRef.once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    //var childKey = childSnapshot.key;
+                    //var childData = childSnapshot.val();
+                    // ...
+                    console.log(childSnapshot.key);
+
+                    var key = gup('key', window.location.href)
+
+                    if (childSnapshot.key == key) {
+
+
+                    }    
+                  
+
+                });
+            });
+
+            function gup(name, url) {
+                if (!url) url = location.href;
+                name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                var regexS = "[\\?&]" + name + "=([^&#]*)";
+                var regex = new RegExp(regexS);
+                var results = regex.exec(url);
+                return results == null ? null : results[1];
+            }
+            
+
+        </script>
+        
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

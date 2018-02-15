@@ -27,37 +27,68 @@
     <ul id="list"></ul>
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
 
-    <script>
-        // Initialize Firebase
-        //var config = {
-        //    apiKey: "AIzaSyDJKWHkRz5w0a0OQ8EJI1woyrzv2Y8sSxE",
-        //    authDomain: "final-year-project-188517.firebaseapp.com",
-        //    databaseURL: "https://final-year-project-188517.firebaseio.com",
-        //    projectId: "final-year-project-188517",
-        //    storageBucket: "final-year-project-188517.appspot.com",
-        //    messagingSenderId: "414362957154"
-        //};
-        //firebase.initializeApp(config);
+    @*<script>
+         //Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDJKWHkRz5w0a0OQ8EJI1woyrzv2Y8sSxE",
+            authDomain: "final-year-project-188517.firebaseapp.com",
+            databaseURL: "https://final-year-project-188517.firebaseio.com",
+            projectId: "final-year-project-188517",
+            storageBucket: "final-year-project-188517.appspot.com",
+            messagingSenderId: "414362957154"
+        };
+        firebase.initializeApp(config);
 
 
-        //// Get elements
-        //var object = document.getElementById('object');
-        //var list = document.getElementById('list');
+        // Get elements
+        var object = document.getElementById('object');
+        var list = document.getElementById('list');
 
-        //// Create Reference
+        // Create Reference
 
-        //var dbRef = firebase.database().ref().child('Driver');
+        var dbRef = firebase.database().ref().child('Driver');
         //var dbList = dbRef.child('yIIYu6SFObWBur1XV5JOAjliO3A3');
-        ////   var dbRef = firebase.database().ref("object");
+        //   var dbRef = firebase.database().ref("object");
 
 
-        ////Sync object changes
-        //dbRef.on('value', snap => object.innerText = JSON.stringify(snap.val(), null, 3));
-        ///* dbRef.on('value', snap => object.innerText = snap.val());
-        // dbRef.on('value', snap => console.log(snap.val()));
-        // */
+        //Sync object changes
+        //dbRef.on('value', snap =>
+        //    $('#contacts').append(contactHtmlFromObject(JSON.stringify(snap.val())))
+        //);
 
-        ////Sync List changes
+        dbRef.once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                //var childKey = childSnapshot.key;
+                //var childData = childSnapshot.val();
+                // ...
+                //console.log(childSnapshot.val().busnumber);
+                $('#contacts').append(contactHtmlFromObject(childSnapshot.val()));
+            });
+        });
+
+        //prepare conatct object's HTML
+        function contactHtmlFromObject(contact) {
+
+            console.log(contact.busnumber)
+           
+            
+            var html = '';
+            html += '<li class="list-group-item contact">';
+            html += '<div>';
+            html += '<p class="lead">' + contact.busnumber + '</p>';
+            html += '<p>' + contact.username + '</p>';
+            html += '<p>' + contact.email + '</p>';
+            html += '<p>' + contact.phonenumber + '</p>';
+            html += '</div>';
+            html += '</li>';
+            return html;
+        }
+
+        /* dbRef.on('value', snap => object.innerText = snap.val());
+         dbRef.on('value', snap => console.log(snap.val()));
+         */
+
+        //Sync List changes
         //dbList.on('child_added', snap => {
         //    var li = document.createElement('li');
         //    li.innerText = snap.val();
@@ -76,9 +107,12 @@
         //    liRemoved.remove();
         //});
 
-    </script>
 
+    </script>*@
 
+    <div id="contacts">
+
+    </div>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -112,7 +146,7 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+    @*    <script src="~/js/site.js" asp-append-version="true"></script>*@
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"

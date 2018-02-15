@@ -6,46 +6,166 @@
 
 <h2>Details</h2>
 
-<script src="~/js/site.js"></script>
+<div id="">
 
-<div>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bus Number</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Remove</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody id="detailsdata">
+        </tbody>
+        </table>
+</div>
+
+
+
+@*<script src="~/js/site.js"></script>*@
+
+<script>
+    //Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDJKWHkRz5w0a0OQ8EJI1woyrzv2Y8sSxE",
+        authDomain: "final-year-project-188517.firebaseapp.com",
+        databaseURL: "https://final-year-project-188517.firebaseio.com",
+        projectId: "final-year-project-188517",
+        storageBucket: "final-year-project-188517.appspot.com",
+        messagingSenderId: "414362957154"
+    };
+    firebase.initializeApp(config);
+
+
+    // Get elements
+    var object = document.getElementById('object');
+    var list = document.getElementById('list');
+
+    // Create Reference
+
+    var dbRef = firebase.database().ref().child('Driver');
+    //var dbList = dbRef.child('yIIYu6SFObWBur1XV5JOAjliO3A3');
+    //   var dbRef = firebase.database().ref("object");
+
+
+    //Sync object changes
+    //dbRef.on('value', snap =>
+    //    $('#contacts').append(contactHtmlFromObject(JSON.stringify(snap.val())))
+    //);
+
+    dbRef.once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            //var childKey = childSnapshot.key;
+            //var childData = childSnapshot.val();
+            // ...
+            console.log(childSnapshot.key);
+
+
+
+
+            $('#detailsdata').append(contactHtmlFromObject(childSnapshot.key, childSnapshot.val()));
+            //var trs = '';
+            //trs += contactHtmlFromObject(childSnapshot.val());
+
+            //console.log(trs);
+
+            //var html = '<table class="table">';
+            //html += '<thead>';
+            //html += '<tr>';
+            //html += '<th>Bus Number</th>';
+            //html += '<th>Username</th>';
+            //html += '<th>Email</th>';
+            //html += '<th>Phone number</th>';
+            //html += '</tr>';
+            //html += '</thead>';
+            //html += '<tbody id="detailsdata">';
+
+            //html += '</tbody>'
+            //html += '</table>';
+
+
+        });
+    });
+
+    function del(key) {
+        //alert('key');
+
+        //return false;
+        //console.log(key);
+        dbRef.child(key).remove();
+        location.reload();
+    }
+
+    function edit(key) {
+
+        window.location.href = 'edit?id=' + key;
+
+    }
+    //prepare conatct object' HTML
+    function contactHtmlFromObject(key, contact) {
+
+        //console.log(contact.busnumber)
+
+        var ourKey = key;
+        console.log(ourKey);
+
+
+        var html = '<tr>';
+        html += '<td>' + contact.busnumber + '</td>';
+        html += '<td>' + contact.username + '</td>';
+        html += '<td>' + contact.email + '</td>';
+        html += '<td>' + contact.phonenumber + '</td>';
+        html += '<td><button type="button" onClick="del(\'' + ourKey + '\')">Delete</button></td>';
+        html += '<td><button type="button" onClick="edit(\'' + ourKey + '\')">Edit</button></td>';
+        html += '</tr>';
+        return html;
+    }
+
+        /* dbRef.on('value', snap => object.innerText = snap.val());
+         dbRef.on('value', snap => console.log(snap.val()));
+         */
+
+        //Sync List changes
+        //dbList.on('child_added', snap => {
+        //    var li = document.createElement('li');
+        //    li.innerText = snap.val();
+        //    li.id = snap.key;
+        //    list.appendChild(li);
+        //});
+
+        //dbList.on('child_changed', snap => {
+
+        //    var liChanged = document.getElementById(snap.key);
+        //    liChanged.innerText = snap.val();
+        //});
+
+        //dbList.on('child_removed', snap => {
+        //    var liRemoved = document.getElementById(snap.key);
+        //    liRemoved.remove();
+        //});
+
+</script>
+
+
+
+@*<div>
     <h4>Driver</h4>
     <hr />
     
        
             <div class="col-md-6">
                 <ul id="list" class="list-group"></ul>
-                
-                <script>
-                   
-                    //dbRef.on("child_added", function (snap) {
-                    //    console.log("added", snap.key(), snap.val());
-                    //    document.innerHTML += driverHtmlFromObject(snap.val());
-                    //});
-                    
-
-                    ////prepare conatct object's HTML
-                    //function driverHtmlFromObject(driver) {
-                    //    console.log(driver);
-                    //    var html = '';
-                    //    html += '<li class="list-group-item driver">';
-                    //    html += '<div>';
-                    //    html += '<p class="lead">' + driver.name + '</p>';
-                    //    html += '<p>' + driver.email + '</p>';
-                    //    html += '<p><small title="' + driver.location.zip + '">'
-                    //        + driver.location.city + ', '
-                    //        + driver.location.state + '</small></p>';
-                    //    html += '</div>';
-                    //    html += '</li>';
-                    //    return html;
-                    //}
-
-                   
-
-                </script>
+         
 
             </div>
-</div>
+</div>*@
 @*<div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
