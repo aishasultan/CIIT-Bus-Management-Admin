@@ -128,8 +128,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Drivers" asp-action="Index">Drivers</a></li>
-                    <li><a asp-area="" asp-controller="Students" asp-action="Index">Students</a></li>
+                    <li><a asp-area="" asp-controller="Drivers" asp-action="Details">Drivers</a></li>
+                    <li><a asp-area="" asp-controller="Students" asp-action="Details">Students</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Maps</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -165,6 +166,7 @@
     </environment>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap-select.min.js"></script>
+
 
     @RenderSection("Scripts", required: false)
 </body>

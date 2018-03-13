@@ -9,6 +9,5 @@ namespace testing.Models.AdminManageModels
     {
         public string lng { get; set; }
         public string lat { get; set; }
-
     }
 }

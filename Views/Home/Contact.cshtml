@@ -1,17 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Contact";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+</head>
+<body>
+    <div id="map" class="map"></div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <div id="page-marker" class="page-marker">
+        @*<svg>
+            <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+                <circle id="page-marker-panel-0" cx="13" cy="13" r="12" stroke="#445A65" stroke-width="2" fill="none" />
+                <circle id="page-marker-panel-1" cx="61" cy="13" r="12" stroke="#445A65" stroke-width="2" fill="none" />
+                <circle id="page-marker-panel-2" cx="109" cy="13" r="12" stroke="#445A65" stroke-width="2" fill="none" />
+            </g>
+        </svg>*@
+    </div>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <div class="top-bar">
+        <span class="io-bus-tracker">CIIT Bus Tracker</span>
+        <span id="display-time" class="display-time"></span>
+        <span class="google-maps-apis"></span>
+    </div>
+
+    <script src="~/js/index.js"></script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_fid6iFJzC3VlxWjySLP6xquRVwdvzZM&libraries=visualization&callback=initMap">
+    </script>
+</body>
+</html>

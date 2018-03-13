@@ -20,10 +20,10 @@ firebase.initializeApp(config);
 
 var dbRef = firebase.database().ref().child('Driver');
 var dbRef1 = firebase.database().ref().child('Student');
-var dbRef2 = firebase.database().ref().child('DriverLocation');
+var clicks = firebase.database().ref().child('DriverLocation');
 var dbRef3 = firebase.database().ref().child('Feedback');
 
-//var dbList = dbRef.child('yIIYu6SFObWBur1XV5JOAjliO3A3');
+var dbList = dbRef.child('yIIYu6SFObWBur1XV5JOAjliO3A3');
 
 
 //Sync object changes
