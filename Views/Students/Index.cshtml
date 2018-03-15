@@ -9,38 +9,69 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    Registration Number
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td> @item.year-@item.program-@item.RegNo
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div id="">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bus Number</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Remove</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody id="detailsdata"></tbody>
+    </table>
+</div>
+
+<script src="~/js/site.js"></script>
+
+<script>
+     // Create Reference
+
+    var dbRef = firebase.database().ref().child('Student');
+    
+    dbRef.once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            
+            console.log(childSnapshot.key);
+
+            $('#detailsdata').append(contactHtmlFromObject(childSnapshot.key, childSnapshot.val()));
+
+        });
+    });
+
+    function del(key) {
+
+        dbRef.child(key).remove();
+        location.reload();
+    }
+
+    function edit(key) {
+
+        window.location.href = 'edit?id=' + key;
+    }
+
+    //prepare conatct object' HTML
+    function contactHtmlFromObject(key, contact) {
+
+        //console.log(contact.busnumber)
+
+        var ourKey = key;
+        console.log(ourKey);
+
+
+        var html = '<tr>';
+        html += '<td>' + contact.busnumber + '</td>';
+        html += '<td>' + contact.username + '</td>';
+        html += '<td>' + contact.email + '</td>';
+        html += '<td>' + contact.phonenumber + '</td>';
+        html += '<td><button type="button" class="btn btn-default" onClick="del(\'' + ourKey + '\')">Delete</button></td>';
+        html += '<td><button type="button" class="btn btn-default" onClick="edit(\'' + ourKey + '\')">Edit</button></td>';
+        html += '</tr>';
+        return html;
+    }
+
+</script>

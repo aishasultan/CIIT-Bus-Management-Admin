@@ -5,18 +5,20 @@
 <h2>Edit</h2>
 <h4>Driver</h4>
 <hr />
+
+@*<script src="~/js/site.js"></script>*@
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" id="myform">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" id="name" class="form-control" />
+                <input type="text" id="name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="myemail">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" id="email" class="form-control" />
+                <input type="text" id="email" class="form-control" value="abc"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -31,21 +33,54 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" id="submit" value="Create" class="btn btn-default" onclick="click" />
+                <input type="submit" id="submit" value="Save" class="btn btn-default" onclick="click"  />
             </div>
         </form>
 
-        <script>
-            document.getElementById('submit')
-                .addEventListener("click", function writeUserData(name, email, bus, ph) {
-                    firebase.database().ref('Driver/' + ID).set({
-                        Name: name,
-                        Email: email,
-                        BusNumber: bus,
-                        PhoneNumber: ph
-                    });
-                }, false)
+        @*<div id="">
 
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Bus Number</th>
+                    </tr>
+                    <tr>
+                        <th>User Name</th>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody id="detailsdata"></tbody>
+
+            </table>
+
+        </div>*@
+
+        @*<div class="col-md-12" style="display:none" id="EditContent">
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="email">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="bus">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="ph">
+            </div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" value="update" onclick="callUpdateFunction()">
+            </div>
+        </div>*@
+    </div>
+
+        <script>
             var config = {
                 apiKey: "AIzaSyDJKWHkRz5w0a0OQ8EJI1woyrzv2Y8sSxE",
                 authDomain: "final-year-project-188517.firebaseapp.com",
@@ -55,27 +90,172 @@
                 messagingSenderId: "414362957154"
             };
             firebase.initializeApp(config);
+            //var init = function () {
+            //    ref.once('value', function (snapshot) {
+            //        var data = snapshot.val();
+            //        var tr;
+            //        var dataArray = [];
+            //        for (var key in data) {
+            //            data[key].key = key;
+            //            dataArray.push(data[key]);
+            //        };
+
+                    
+            //    });
+            //}
+            //init();
+
+            //function callEditFunction() {
+            //    $('#append tr').click(function () {
+
+            //        var name = $(this).find('td:eq(0)').map(function () {
+            //            return $(this).text();
+            //        }).get().join(" ");
+            //        var email = $(this).find('td:eq(1)').map(function () {
+            //            return $(this).text();
+            //        }).get().join(" ");
+            //        var bus = $(this).find('td:eq(1)').map(function () {
+            //            return $(this).text();
+            //        }).get().join(" ");
+            //        var ph = $(this).find('td:eq(1)').map(function () {
+            //            return $(this).text();
+            //        }).get().join(" ");
+            //        key = $(this).find('td:eq(3)').map(function () {
+            //            return $(this).text();
+            //        }).get().join(" "); //getting the key for the particular tr and assigning to the global variable.
+            //        $("#name").val(name);
+            //        $("#email").val(email);
+            //        $("#bus").val(bus);
+            //        $("#ph").val(ph);
+            //        document.getElementById("EditContent").style.display = "block";
+            //    });
+            //}
+            //function callUpdateFunction() {
+            //    debugger
+            //    var name, email, bus, ph;
+            //    name = document.getElementById("name").value;
+            //    email = document.getElementById("email").value;
+            //    bus = document.getElementById("bus").value;
+            //    ph = document.getElementById("ph").value;
+            //    var dataUpdate = {};
+            //    dataUpdate.username = name;
+            //    dataUpdate.email = email;
+            //    dataUpdate.busnumber = bus;
+            //    dataUpdate.phonenumber = ph;
+            //    ref.child(key).set(dataUpdate).then(function () {
+            //        init();
+            //        document.getElementById("EditContent").style.display = "none";
+            //    })
+            //}
+            
+            document.getElementById('submit')
+                .addEventListener("click", function writeUserData(name, email, bus, ph) {
+                    var dbRef = firebase.database().ref().child('Driver');
+                    var key = location.href.split("id=")[1];
+                    name = document.getElementById("name").value;
+                    email = document.getElementById("email").value;
+                    bus = document.getElementById("bus").value;
+                    ph = document.getElementById("ph").value;
+                    var dataUpdate = {};
+                    dataUpdate.username = name;
+                    dataUpdate.email = email;
+                    dataUpdate.busnumber = bus;
+                    dataUpdate.phonenumber = ph;
+                    dbRef.child(key).set(dataUpdate);
+                }, false)
+
+            //var name, email, bus, ph;
+            
+            //var dataUpdate = {};
+            //dataUpdate.username = name;
+            //dataUpdate.email = email;
+            //dataUpdate.busnumber = bus;
+            //dataUpdate.phonenumber = ph;
 
             var dbRef = firebase.database().ref().child('Driver');
-
-
             dbRef.once('value', function (snapshot) {
+                var data = snapshot.val();
+                console.log(data);
+                console.log("shah ji");
+                var dataArray = [];
+                for (var key in data) {
+                    data[key].key = key;
+                    dataArray.push(data[key]);
+                };
+                console.log(dataArray);
+
+                //var key = gup('key', window.location.href);
+                var x = document.getElementById("email");
+               var mykey=location.href.split("id=")[1] ;
+                for (var i = 0; i < dataArray.length; i++) {
+
+
+                    if (dataArray[i].key == mykey) {
+                        x = "abc";
+                        console.log(dataArray[i].email);
+                        email.val = dataArray[i].email;
+                        var a = document.querySelector('#email');
+                        console.log(a);
+                        $("#email").attr("value", dataArray[i].email);
+                        $("#name").attr("value", dataArray[i].username);
+                        $("#ph").attr("value", dataArray[i].phonenumber);
+                        $("#bus").attr("value", dataArray[i].busnumber);
+                    }
+                   // tr = $('<tr>');
+                    //tr.append("<td>" + dataArray[i].name + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + dataArray[i].email + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + dataArray[i].bus + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + dataArray[i].ph + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + "<input type='button' class='btn btn-primary' value='Edit' onclick='callEditFunction()'/>" + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<td>" + dataArray[i].key + "</td>"); //appending the key to the table so we can edit the particular data.
+                    //$("#append").append(tr);
+                }
+
                 snapshot.forEach(function (childSnapshot) {
                     //var childKey = childSnapshot.key;
                     //var childData = childSnapshot.val();
                     // ...
-                    console.log(childSnapshot.key);
-
+                  //  console.log(childSnapshot.key);
+                    //console.log(childSnapshot.val());
                     var key = gup('key', window.location.href)
 
                     if (childSnapshot.key == key) {
-
-
+                        //$('#detailsdata').append(contactHtmlFromObject(childSnapshot.key, childSnapshot.val()));
+                        console.log(childSnapshot.val());
                     }    
                   
 
                 });
             });
+
+            
+            //prepare conatct object' HTML
+            function contactHtmlFromObject(key, contact) {
+
+                //console.log(contact.busnumber)
+
+                var ourKey = key;
+                console.log(ourKey);
+
+                //var name = contact.username;
+                //var email = contact.email;
+                //var bus = contact.busnumber
+                //var ph = contact.phonenumber;
+
+                //$("#name").append(name);
+                //$("#email").append(email);
+                //$("#bus").append(bus);
+                //$("#ph").append(ph);
+            }
 
             function gup(name, url) {
                 if (!url) url = location.href;
@@ -90,7 +270,6 @@
         </script>
         
     </div>
-</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

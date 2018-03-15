@@ -18,6 +18,7 @@
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Remove</th>
+                <th>Update</th>
             </tr>
         </thead>
         <tbody id="detailsdata"></tbody>
@@ -61,12 +62,8 @@
             //var childData = childSnapshot.val();
             // ...
             console.log(childSnapshot.key);
-
-
-
-
-            $('#detailsdata').append(contactHtmlFromObject(childSnapshot.key, childSnapshot.val()));
             
+            $('#detailsdata').append(contactHtmlFromObject(childSnapshot.key, childSnapshot.val()));           
 
         });
     });
@@ -79,6 +76,12 @@
         dbRef.child(key).remove();
         location.reload();
     }
+
+    function edit(key) {
+
+        window.location.href = 'edit?id=' + key;
+    }
+
     //prepare conatct object' HTML
     function contactHtmlFromObject(key, contact) {
 
@@ -93,7 +96,8 @@
         html += '<td>' + contact.username + '</td>';
         html += '<td>' + contact.email + '</td>';
         html += '<td>' + contact.phonenumber + '</td>';
-        html += '<td><button type="button" onClick="del(\''+ourKey+'\')">Delete</button></td>';
+        html += '<td><button type="button" class="btn btn-default" onClick="del(\'' + ourKey + '\')">Delete</button></td>';
+        html += '<td><button type="button" class="btn btn-default" onClick="edit(\'' + ourKey + '\')">Edit</button></td>';
         html += '</tr>';
         return html;
     }

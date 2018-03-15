@@ -86,44 +86,6 @@ function geocodeAddress(address, map, icon, title) {
   );
 }
 
-class HotelMarkerManager {
-  constructor(map) {
-    this.map = map;
-    this.hotelMarkers = [];
-  }
-
-  add(location, icon, title) {
-    const marker = new google.maps.Marker({
-      position: location,
-      map: this.map,
-      icon: icon,
-      title: title
-    });
-    this.hotelMarkers.push(marker);
-  }
-
-  clear() {
-    this.hotelMarkers.forEach(marker => {
-      marker.setMap(null);
-    });
-    this.hotelMarkers.length = 0;
-  }
-
-  update(markers) {
-    this.clear();
-    markers.forEach(marker => {
-      this.add(
-        {
-          lat: marker.lat,
-          lng: marker.lng
-        },
-        marker.iconPath,
-        marker.name
-      );
-    });
-  }
-}
-
 class BusMarkerManager {
   constructor(map) {
     this.map = map;
@@ -208,7 +170,6 @@ function initMap() {
   );
 
   const busMarkerManager = new BusMarkerManager(map);
-  const hotelMarkerManager = new HotelMarkerManager(map);
   const displayTimeElement = document.querySelector('#display-time');
   const pageMarkerPanelElts = [
     document.querySelector('#page-marker-panel-0'),
@@ -221,7 +182,7 @@ function initMap() {
     displayTimeElement.textContent = snapshot.val().display;
   });
 
-  db.ref('map').on('value', snapshot => {
+  db.ref().child('DriverLocation').on('value', snapshot => {
     const val = snapshot.val();
     map.fitBounds({
       east: val.northEastLng,
@@ -229,8 +190,7 @@ function initMap() {
       south: val.southWestLat,
       west: val.southWestLng
     });
-
-    hotelMarkerManager.update(val.markers);
+     
 
     pageMarkerPanelElts.forEach(elt => {
       elt.classList.remove('selected');
@@ -238,7 +198,7 @@ function initMap() {
     pageMarkerPanelElts[val.panel].classList.add('selected');
   });
 
-  db.ref('bus-locations').on('value', snapshot => {
+  db.ref().child('DriverLocation').on('value', snapshot => {
     busMarkerManager.update(snapshot.val());
   });
 }
