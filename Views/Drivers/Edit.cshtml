@@ -176,7 +176,6 @@
             dbRef.once('value', function (snapshot) {
                 var data = snapshot.val();
                 console.log(data);
-                console.log("shah ji");
                 var dataArray = [];
                 for (var key in data) {
                     data[key].key = key;
@@ -191,7 +190,6 @@
 
 
                     if (dataArray[i].key == mykey) {
-                        x = "abc";
                         console.log(dataArray[i].email);
                         email.val = dataArray[i].email;
                         var a = document.querySelector('#email');

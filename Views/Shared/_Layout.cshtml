@@ -19,10 +19,12 @@
     </environment>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-select.min.css" />
-
+    
+    @RenderSection("Scripts", required: false)
 </head>
 
 <body>
+    
     <pre id="object"></pre>
     <ul id="list"></ul>
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
@@ -147,6 +149,7 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        @*<script src="~/lib/print-js/src/index.js"></script>*@
     @*    <script src="~/js/site.js" asp-append-version="true"></script>*@
     </environment>
     <environment exclude="Development">
@@ -168,7 +171,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap-select.min.js"></script>
 
 
-    @RenderSection("Scripts", required: false)
+    
 </body>
 </html>
 

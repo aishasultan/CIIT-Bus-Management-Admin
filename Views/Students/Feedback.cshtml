@@ -1,0 +1,191 @@
+﻿@model testing.Models.AdminManageModels.Student
+
+@{
+    ViewData["Title"] = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Feedback</h2>
+
+<hr />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+
+<link rel="stylesheet" href="~/css/style.css">
+<link rel="stylesheet" href="~/css/loader-style.css">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+
+<link rel="stylesheet" href="~/css/profile.css">
+
+<div class="col-sm-12">
+    <div class="well profile">
+        <div class="col-sm-12">
+            <div class="col-xs-12 col-sm-4 text-center">
+
+                <ul class="list-group">
+                    <li class="list-group-item text-left">
+                        <span class="entypo-user"></span>&nbsp;&nbsp;Profile
+                    </li>
+                    <li class="list-group-item text-center">
+                        <img src="https://api.randomuser.me/portraits/men/10.jpg" alt="" class="img-circle img-responsive img-profile">
+
+                    </li>
+                    <li class="list-group-item text-center">
+                        <span class="pull-left">
+                            <strong>Ratings</strong>
+                        </span>
+
+
+                        <div class="ratings">
+
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star-o"></span>
+                            </a>
+
+                        </div>
+
+
+                    </li>
+
+                    <li class="list-group-item text-right">
+                        <span class="pull-left">
+                            <strong>Joined</strong>
+                        </span>2.13.2014
+                    </li>
+                    <li class="list-group-item text-right">
+                        <span class="pull-left">
+                            <strong>Last seen</strong>
+                        </span>Yesterday
+                    </li>
+                    <li class="list-group-item text-right">
+                        <span class="pull-left">
+                            <strong>Nickname</strong>
+                        </span>themesmile
+                    </li>
+
+                </ul>
+
+            </div>
+            <div class="col-xs-12 col-sm-8 profile-name">
+                <h2>
+                    Dave Mattew
+                    <span class="pull-right social-profile">
+                        <i class="entypo-facebook-circled"></i>  <i class="entypo-twitter-circled"></i>  <i class="entypo-linkedin-circled"></i>  <i class="entypo-github-circled"></i>  <i class="entypo-gplus-circled"></i>
+                    </span>
+                </h2>
+                <hr>
+
+                <dl class="dl-horizontal-profile">
+                    <dt>User Id</dt>
+                    <dd>eko.sulis</dd>
+
+                    <dt>Name</dt>
+                    <dd>Eko Sulistyo</dd>
+
+                    <dt>Email</dt>
+                    <dd>eko.sulistyo@yahoo.com</dd>
+
+                    <dt>Phone</dt>
+                    <dd>081 725 xxx</dd>
+
+                    <dt>Active Periode</dt>
+                    <dd>02 Dec 2014</dd>
+
+                    <dt>Last Update</dt>
+                    <dd>02 Apr 2014</dd>
+
+                    <dt>About</dt>
+                    <dd>Web Designer / UI</dd>
+
+                    <dt>Hobbies</dt>
+                    <dd>Read, out with friends, listen to music, draw and learn new things</dd>
+
+                    <dt>Skills</dt>
+                    <dd>
+                        <span class="tags">html5</span>
+                        <span class="tags">css3</span>
+                        <span class="tags">jquery</span>
+                        <span class="tags">bootstrap3</span>
+                    </dd>
+
+                </dl>
+
+
+                <hr>
+
+                @*<h5>
+                    <span class="entypo-arrows-ccw"></span>&nbsp;&nbsp;Recent Activities
+                </h5>*@
+
+                @*<div class="table-responsive">
+                    <table class="table table-hover table-striped table-condensed">
+
+                        <tbody>
+                            <tr>
+                                <td><i class="pull-right fa fa-edit"></i> Today, 1:00 - Jeff Manzi liked your post.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="pull-right fa fa-edit"></i> Today, 12:23 - Mark Friendo liked and shared your post.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="pull-right fa fa-edit"></i> Today, 12:20 - You posted a new blog entry title "Why social media is".</td>
+                            </tr>
+                            <tr>
+                                <td><i class="pull-right fa fa-edit"></i> Yesterday - Karen P. liked your post.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="pull-right fa fa-edit"></i> 2 Days Ago - Philip W. liked your post.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="pull-right fa fa-edit"></i> 2 Days Ago - Jeff Manzi liked your post.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>*@
+
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+
+
+<script src="~/js/site.js"></script>
+<script>
+    // tr = $('<tr>');
+                    //tr.append("<td>" + dataArray[i].name + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + dataArray[i].email + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + dataArray[i].bus + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + dataArray[i].ph + "</td>");
+                    //tr.append("</tr>");
+                    //tr.append("<tr>");
+                    //tr.append("<td>" + "<input type='button' class='btn btn-primary' value='Edit' onclick='callEditFunction()'/>" + "</td>");
+                    //tr.append("</tr>");
+</script>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -44,6 +44,29 @@ namespace testing.Controllers
             }
         }
 
+        // GET: Students/RegForms
+        public ActionResult RegForms()
+        {
+            return View();
+        }
+
+        // POST: Students/RegForms
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegForms(IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // GET: Students/Edit/5
         public ActionResult Edit(int id)
         {
@@ -81,6 +104,29 @@ namespace testing.Controllers
             try
             {
                 // TODO: Add delete logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Students/Feedback
+        public ActionResult Feedback()
+        {
+            return View();
+        }
+
+        // POST: Students/Feedback
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Feedback(IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
 
                 return RedirectToAction(nameof(Index));
             }

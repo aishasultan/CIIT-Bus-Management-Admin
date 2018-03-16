@@ -1,0 +1,106 @@
+﻿@model testing.Models.AdminManageModels.Student
+
+@{
+    ViewData["Title"] = "Registration Forms";
+}
+
+<h2>Registration Forms</h2>
+
+<div>
+    <input type="button" onclick="printJS('printJS-form', 'html')" class="btn btn-default" value="Download All" />
+    <hr />
+</div>
+    <div id="printJS-form">
+        
+        <table id="table" class="table"> 
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Bus Stop</th>
+                    <th>Bus Number</th>
+                    @*<th>Delete</th>
+                    <th>Download</th>*@
+                </tr>
+            </thead>
+            <tbody id="detailsdata"></tbody>
+        </table>
+    </div>
+
+<script src="~/js/site.js"></script>
+
+<script>
+
+    // Create Reference
+
+    var dbRef = firebase.database().ref().child('Registration');
+
+    dbRef.once('value', function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            console.log(childSnapshot.key);
+            console.log(childSnapshot.val());
+
+            $('#detailsdata').append(contactHtmlFromObject(childSnapshot.key, childSnapshot.val()));
+
+        });
+    });
+
+    function del(key) {
+
+        dbRef.child(key).remove();
+        location.reload();
+    }
+
+    function print(key) {
+
+
+    }
+
+    //prepare conatct object' HTML
+    function contactHtmlFromObject(key, contact) {
+
+        var ourKey = key;
+        console.log(ourKey);
+
+        console.log(window.location.href);
+        var html = '<tr>';
+        html += '<td>' + contact.name + '</td>';
+        html += '<td>' + contact.email + '</td>';
+        html += '<td>' + contact.phoneNumber + '</td>';
+        html += '<td>' + contact.address + '</td>';
+        html += '<td>' + contact.stopName + '</td>';
+        html += '<td>' + contact.busNumber + '</td>';
+        //html += '<td><button type="button" class="btn btn-default" onClick="del(\'' + ourKey + '\')">Delete</button></td>';
+        //html += '<td><button type="button" class="btn btn-default" onClick="print(\'' + ourKey + '\')">Download</button></td>';
+        html += '</tr>';
+        return html;
+    }
+</script>
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+@*<script src="~/lib/print-js/src/index.js"></script>
+<script src="~/lib/print-js/webpack.mix.js"></script>
+<script src="~/lib/print-js/src/js/print.js"></script>
+<script src="~/lib/print-js/src/js/pdf.js"></script>
+<link rel="stylesheet" href="~/lib/print-js/src/css/print.css" />*@
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
