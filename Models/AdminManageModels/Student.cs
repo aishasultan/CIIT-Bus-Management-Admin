@@ -15,6 +15,8 @@ namespace testing.Models.AdminManageModels
 
         public string program { get; set; }
 
+        public string UserName { get; set; }
+
         [Required(ErrorMessage = "You Registration Number is required.")]
         public int RegNo { get; set; }
 

@@ -8,6 +8,8 @@
 
 <h4>Student</h4>
 <hr />
+
+<script src="~/js/site.js"></script>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -16,184 +18,131 @@
             <label asp-for="RegNo" class="control-label"></label>
             <div class="form-group">
                 <div class="col-lg-4">
-                    <select name="year" id="year" class="selectpicker" data-width="100px" onchange="updateDetail()">
-                        <option value="FA00">FA00</option>
-                        <option value="FA01">FA01</option>
-                        <option value="FA02">FA02</option>
-                        <option value="FA03">FA03</option>
-                        <option value="FA04">FA04</option>
-                        <option value="FA05">FA05</option>
-                        <option value="FA06">FA06</option>
-                        <option value="FA07">FA07</option>
-                        <option value="FA08">FA08</option>
-                        <option value="FA09">FA09</option>
-                        <option value="FA10">FA10</option>
-                        <option value="FA11">FA11</option>
-                        <option value="FA12">FA12</option>
-                        <option value="FA13">FA13</option>
-                        <option value="FA14">FA14</option>
-                        <option value="FA15">FA15</option>
-                        <option value="FA16">FA16</option>
-                        <option value="FA17">FA17</option>
-                        <option value="FA99">FA99</option>
-                        <option value="SP00">SP00</option>
-                        <option value="SP01">SP01</option>
-                        <option value="SP02">SP02</option>
-                        <option value="SP03">SP03</option>
-                        <option value="SP04">SP04</option>
-                        <option value="SP05">SP05</option>
-                        <option value="SP06">SP06</option>
-                        <option value="SP07">SP07</option>
-                        <option value="SP08">SP08</option>
-                        <option value="SP09">SP09</option>
-                        <option value="SP10">SP10</option>
-                        <option value="SP11">SP11</option>
-                        <option value="SP12">SP12</option>
-                        <option value="SP13">SP13</option>
-                        <option value="SP14">SP14</option>
-                        <option value="SP15">SP15</option>
-                        <option value="SP16">SP16</option>
-                        <option value="SP17">SP17</option>
-                        <option value="SP18">SP18</option>
-                        <option value="SU00">SU00</option>
-                        <option value="SU01">SU01</option>
-                        <option value="SU02">SU02</option>
-                        <option value="SU03">SU03</option>
-                        <option value="SU04">SU04</option>
-                        <option value="SU05">SU05</option>
-                        <option value="SU06">SU06</option>
-                        <option value="SU07">SU07</option>
-                        <option value="SU08">SU08</option>
-                        <option value="SU09">SU09</option>
-                        <option value="SU10">SU10</option>
-                        <option value="SU11">SU11</option>
-                        <option value="SU12">SU12</option>
-                        <option value="SU13">SU13</option>
-                        <option value="SU14">SU14</option>
-                        <option value="SU15">SU15</option>
-                        <option value="SU16">SU16</option>
-                        <option value="SU17">SU17</option>
-                        <option value="SU18">SU18</option>
-
-                    </select>
+                    <input asp-for="year" type="text" maxlength="4" id="year" class="form-control" readonly/>
                 </div>
                 <div class="col-lg-4">
-                    <select name="program" id="program" class="selectpicker" data-width="100px" onchange="updateDetail()">
-                        <option value="BAF">BAF</option>
-                        <option value="BAR">BAR</option>
-                        <option value="BBA">BBA</option>
-                        <option value="BBE">BBE</option>
-                        <option value="BBI">BBI</option>
-                        <option value="BBS">BBS</option>
-                        <option value="BCE">BCE</option>
-                        <option value="BCE">BCE&nbsp;</option>
-                        <option value="BCS">BCS</option>
-                        <option value="BCS-BCE">BCS-BCE</option>
-                        <option value="BDE">BDE</option>
-                        <option value="BEC">BEC</option>
-                        <option value="BEE">BEE</option>
-                        <option value="BEL">BEL</option>
-                        <option value="BES">BES</option>
-                        <option value="BET">BET</option>
-                        <option value="BIT">BIT</option>
-                        <option value="BPH">BPH</option>
-                        <option value="BPY">BPY</option>
-                        <option value="BS(ECE)">BS(ECE)</option>
-                        <option value="BSB">BSB</option>
-                        <option value="BSD">BSD</option>
-                        <option value="BSE">BSE</option>
-                        <option value="BSI">BSI</option>
-                        <option value="BSM">BSM</option>
-                        <option value="BSO">BSO</option>
-                        <option value="BSS">BSS</option>
-                        <option value="BTN">BTN</option>
-                        <option value="ECE">ECE</option>
-                        <option value="EEE">EEE</option>
-                        <option value="EPE">EPE</option>
-                        <option value="MB4">MB4</option>
-                        <option value="MB7">MB7</option>
-                        <option value="MBA">MBA</option>
-                        <option value="MBA-MBI">MBA-MBI</option>
-                        <option value="MBE">MBE</option>
-                        <option value="MBE-MIE">MBE-MIE</option>
-                        <option value="MBI">MBI</option>
-                        <option value="MBM">MBM</option>
-                        <option value="MBO">MBO</option>
-                        <option value="MBT">MBT</option>
-                        <option value="MBX">MBX</option>
-                        <option value="MCS">MCS</option>
-                        <option value="MEM">MEM</option>
-                        <option value="MIE">MIE</option>
-                        <option value="MIT">MIT</option>
-                        <option value="MME">MME</option>
-                        <option value="MPM">MPM</option>
-                        <option value="MSE">MSE</option>
-                        <option value="MTC">MTC</option>
-                        <option value="PAR">PAR</option>
-                        <option value="PBI">PBI</option>
-                        <option value="PBM">PBM</option>
-                        <option value="PBS">PBS</option>
-                        <option value="PCE">PCE</option>
-                        <option value="PCS">PCS</option>
-                        <option value="PEE">PEE</option>
-                        <option value="PGD">PGD</option>
-                        <option value="PHI">PHI</option>
-                        <option value="PME">PME</option>
-                        <option value="PMG">PMG</option>
-                        <option value="PMI">PMI</option>
-                        <option value="PMS">PMS</option>
-                        <option value="PMT">PMT</option>
-                        <option value="PPH">PPH</option>
-                        <option value="RAR">RAR</option>
-                        <option value="RBA">RBA</option>
-                        <option value="RBF">RBF</option>
-                        <option value="RBI">RBI</option>
-                        <option value="RBM">RBM</option>
-                        <option value="RBS">RBS</option>
-                        <option value="RCE">RCE</option>
-                        <option value="RCS">RCS</option>
-                        <option value="REC">REC</option>
-                        <option value="REE">REE</option>
-                        <option value="REL">REL</option>
-                        <option value="REM">REM</option>
-                        <option value="RHI">RHI</option>
-                        <option value="RIR">RIR</option>
-                        <option value="RIS">RIS</option>
-                        <option value="RME">RME</option>
-                        <option value="RMG">RMG</option>
-                        <option value="RMI">RMI</option>
-                        <option value="RMS">RMS</option>
-                        <option value="RMT">RMT</option>
-                        <option value="RMV">RMV</option>
-                        <option value="RNT">RNT</option>
-                        <option value="RPH">RPH</option>
-                        <option value="RPM">RPM</option>
-                        <option value="RRG">RRG</option>
-                        <option value="RSE">RSE</option>
-
-                    </select>
+                    <input asp-for="program" type="text" maxlength="3" id="program" class="form-control" readonly/>
                 </div>
                 <div class="col-lg-4">
-                    <input asp-for="RegNo" type="text" maxlength="3" id="RegNo" class="form-control" onkeyup="updateDetail()">
+                    <input asp-for="RegNo" type="text" maxlength="3" id="RegNo" class="form-control" readonly/>
                 </div>
 
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" id="name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" id="email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" id="ph" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusNumber" class="control-label"></label>
+                <input asp-for="BusNumber" id="bus" class="form-control" />
+                <span asp-validation-for="BusNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="submit" value="Save" class="btn btn-default" onclick="click" />
             </div>
         </form>
     </div>
 </div>
+
+<script>
+
+    document.getElementById('submit')
+        .addEventListener("click", function writeUserData(name, email, bus, ph, year, program, regno) {
+            var dbRef = firebase.database().ref().child('Student');
+            var key = location.href.split("id=")[1];
+            
+            year = document.getElementById("year").options[1].text;
+            console.log(year);
+           
+            program = document.getElementById("program").value;
+            regno = document.getElementById("RegNo").value;
+            name = document.getElementById("name").value;
+            email = document.getElementById("email").value;
+            bus = document.getElementById("bus").value;
+            ph = document.getElementById("ph").value;
+            var dataUpdate = {};
+            dataUpdate.year = year;
+            dataUpdate.program = program;
+            dataUpdate.regno = regno;
+            dataUpdate.username = name;
+            dataUpdate.email = email;
+            dataUpdate.busnumber = bus;
+            dataUpdate.phonenumber = ph;
+            dbRef.child(key).set(dataUpdate);
+        }, false)
+
+    var dbRef = firebase.database().ref().child('Student');
+    dbRef.once('value', function (snapshot) {
+        var data = snapshot.val();
+       // console.log(data);
+        var dataArray = [];
+        for (var key in data) {
+            data[key].key = key;
+            dataArray.push(data[key]);
+        };
+       // console.log(dataArray);
+
+        //var key = gup('key', window.location.href);
+        var x = document.getElementById("email");
+        var mykey = location.href.split("id=")[1];
+        $(document).ready(function () {
+            for (var i = 0; i < dataArray.length; i++) {
+
+                if (dataArray[i].key == mykey) {
+                    //   console.log(dataArray[i].email);
+                    email.val = dataArray[i].email;
+                    var a = document.querySelector('#email');
+                    //   console.log(a);
+                    $("#email").attr("value", dataArray[i].email);
+                    $("#name").attr("value", dataArray[i].username);
+                    $("#ph").attr("value", dataArray[i].phonenumber);
+                    $("#bus").attr("value", dataArray[i].busnumber);
+                    $("#RegNo").attr("value", dataArray[i].regno);
+                    $("#program").attr("value", dataArray[i].program);
+                    $("#year").attr("value", dataArray[i].year);
+                }
+
+            }
+        })
+        snapshot.forEach(function (childSnapshot) {
+            var key = gup('key', window.location.href)
+
+            if (childSnapshot.key == key) {
+             //   console.log(childSnapshot.val());
+            }
+
+
+        });
+    });
+
+            function contactHtmlFromObject(key, contact) {
+                
+                var ourKey = key;
+             //   console.log(ourKey);
+            }
+
+            function gup(name, url) {
+                if (!url) url = location.href;
+                name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                var regexS = "[\\?&]" + name + "=([^&#]*)";
+                var regex = new RegExp(regexS);
+                var results = regex.exec(url);
+                return results == null ? null : results[1];
+            }
+</script>
+
+
 
 <div>
     <a asp-action="Index">Back to List</a>

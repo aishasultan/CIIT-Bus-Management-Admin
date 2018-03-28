@@ -20,101 +20,10 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-select.min.css" />
     
-    @RenderSection("Scripts", required: false)
 </head>
 
 <body>
-    
-    <pre id="object"></pre>
-    <ul id="list"></ul>
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-
-    @*<script>
-         //Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyDJKWHkRz5w0a0OQ8EJI1woyrzv2Y8sSxE",
-            authDomain: "final-year-project-188517.firebaseapp.com",
-            databaseURL: "https://final-year-project-188517.firebaseio.com",
-            projectId: "final-year-project-188517",
-            storageBucket: "final-year-project-188517.appspot.com",
-            messagingSenderId: "414362957154"
-        };
-        firebase.initializeApp(config);
-
-
-        // Get elements
-        var object = document.getElementById('object');
-        var list = document.getElementById('list');
-
-        // Create Reference
-
-        var dbRef = firebase.database().ref().child('Driver');
-        //var dbList = dbRef.child('yIIYu6SFObWBur1XV5JOAjliO3A3');
-        //   var dbRef = firebase.database().ref("object");
-
-
-        //Sync object changes
-        //dbRef.on('value', snap =>
-        //    $('#contacts').append(contactHtmlFromObject(JSON.stringify(snap.val())))
-        //);
-
-        dbRef.once('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                //var childKey = childSnapshot.key;
-                //var childData = childSnapshot.val();
-                // ...
-                //console.log(childSnapshot.val().busnumber);
-                $('#contacts').append(contactHtmlFromObject(childSnapshot.val()));
-            });
-        });
-
-        //prepare conatct object's HTML
-        function contactHtmlFromObject(contact) {
-
-            console.log(contact.busnumber)
-           
-            
-            var html = '';
-            html += '<li class="list-group-item contact">';
-            html += '<div>';
-            html += '<p class="lead">' + contact.busnumber + '</p>';
-            html += '<p>' + contact.username + '</p>';
-            html += '<p>' + contact.email + '</p>';
-            html += '<p>' + contact.phonenumber + '</p>';
-            html += '</div>';
-            html += '</li>';
-            return html;
-        }
-
-        /* dbRef.on('value', snap => object.innerText = snap.val());
-         dbRef.on('value', snap => console.log(snap.val()));
-         */
-
-        //Sync List changes
-        //dbList.on('child_added', snap => {
-        //    var li = document.createElement('li');
-        //    li.innerText = snap.val();
-        //    li.id = snap.key;
-        //    list.appendChild(li);
-        //});
-
-        //dbList.on('child_changed', snap => {
-
-        //    var liChanged = document.getElementById(snap.key);
-        //    liChanged.innerText = snap.val();
-        //});
-
-        //dbList.on('child_removed', snap => {
-        //    var liRemoved = document.getElementById(snap.key);
-        //    liRemoved.remove();
-        //});
-
-
-    </script>*@
-
-    <div id="contacts">
-
-    </div>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -130,9 +39,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Drivers" asp-action="Details">Drivers</a></li>
-                    <li><a asp-area="" asp-controller="Students" asp-action="Details">Students</a></li>
+                    <li><a asp-area="" asp-controller="Drivers" asp-action="Index">Drivers</a></li>
+                    <li><a asp-area="" asp-controller="Students" asp-action="Index">Students</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Maps</a></li>
+                    <li><a asp-area="" asp-controller="Notifications" asp-action="Notification">Notifications</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -170,6 +80,7 @@
 
     <script src="~/lib/bootstrap/dist/js/bootstrap-select.min.js"></script>
 
+    @RenderSection("Scripts", required: false)
 
     
 </body>

@@ -6,28 +6,26 @@
 </head>
 <body>
     <div id="map" class="map"></div>
-
-    <div id="page-marker" class="page-marker">
-        @*<svg>
-            <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
-                <circle id="page-marker-panel-0" cx="13" cy="13" r="12" stroke="#445A65" stroke-width="2" fill="none" />
-                <circle id="page-marker-panel-1" cx="61" cy="13" r="12" stroke="#445A65" stroke-width="2" fill="none" />
-                <circle id="page-marker-panel-2" cx="109" cy="13" r="12" stroke="#445A65" stroke-width="2" fill="none" />
-            </g>
-        </svg>*@
+    <div id="content">
+        Hello world!
+    </div>
+    <div id="map_wrapper">
+        <div id="map_canvas" class="mapping"></div>
     </div>
 
-    <div class="top-bar">
+    @*<div class="top-bar">
         <span class="io-bus-tracker">CIIT Bus Tracker</span>
         <span id="display-time" class="display-time"></span>
         <span class="google-maps-apis"></span>
-    </div>
+    </div>*@
 
-    <script src="~/js/index.js"></script>
+    <script src="~/js/test.js"></script>
     <script src="~/js/site.js"></script>
 
+
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_fid6iFJzC3VlxWjySLP6xquRVwdvzZM&libraries=visualization&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_fid6iFJzC3VlxWjySLP6xquRVwdvzZM&libraries=visualization&callback=drivers">
     </script>
+
 </body>
 </html>

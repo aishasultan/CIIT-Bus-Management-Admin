@@ -35,49 +35,7 @@
             <div class="form-group">
                 <input type="submit" id="submit" value="Save" class="btn btn-default" onclick="click"  />
             </div>
-        </form>
-
-        @*<div id="">
-
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Bus Number</th>
-                    </tr>
-                    <tr>
-                        <th>User Name</th>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                    </tr>
-                    <tr>
-                        <th>Phone Number</th>
-                    </tr>
-                </thead>
-                <tbody id="detailsdata"></tbody>
-
-            </table>
-
-        </div>*@
-
-        @*<div class="col-md-12" style="display:none" id="EditContent">
-            <div class="col-md-2">
-                <input type="text" class="form-control" id="name">
-            </div>
-            <div class="col-md-2">
-                <input type="text" class="form-control" id="email">
-            </div>
-            <div class="col-md-2">
-                <input type="text" class="form-control" id="bus">
-            </div>
-            <div class="col-md-2">
-                <input type="text" class="form-control" id="ph">
-            </div>
-            <div class="col-md-2">
-                <input type="button" class="btn btn-primary" value="update" onclick="callUpdateFunction()">
-            </div>
-        </div>*@
+        </form>      
     </div>
 
         <script>
@@ -185,9 +143,8 @@
 
                 //var key = gup('key', window.location.href);
                 var x = document.getElementById("email");
-               var mykey=location.href.split("id=")[1] ;
+                var mykey=location.href.split("id=")[1] ;
                 for (var i = 0; i < dataArray.length; i++) {
-
 
                     if (dataArray[i].key == mykey) {
                         console.log(dataArray[i].email);
@@ -199,6 +156,7 @@
                         $("#ph").attr("value", dataArray[i].phonenumber);
                         $("#bus").attr("value", dataArray[i].busnumber);
                     }
+
                    // tr = $('<tr>');
                     //tr.append("<td>" + dataArray[i].name + "</td>");
                     //tr.append("</tr>");

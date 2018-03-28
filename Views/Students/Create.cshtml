@@ -175,12 +175,18 @@
 
                     </select>
                 </div>
+
                 <div class="col-lg-4">
                     <input asp-for="RegNo" type="text" maxlength="3" id="RegNo" class="form-control" onkeyup="updateDetail()">
                 </div>
 
             </div>
-                
+            <hr/>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" id="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" id="name" class="form-control" />
@@ -207,7 +213,7 @@
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-default" id="submit" onclick="click" />
                           
-                    <script src="~/js/site.js"></script>
+                    
 
                 </div>
 
@@ -230,13 +236,14 @@
                         || document.querySelector('#email').value != '') {
                         dbRef.push({
 
-                            BusNumber: document.querySelector('#bus').value,
-                            Email: document.querySelector('#email').value,
-                            Year: document.querySelector('#year').value,
-                            Program: document.querySelector('#program').value,
-                            RegNo: document.querySelector('#RegNo').value,
-                            PhoneNumber: document.querySelector('#ph').value,
-                            Name: document.querySelector('#name').value
+                            busnumber: document.querySelector('#bus').value,
+                            username: document.querySelector('#UserName').value,
+                            email: document.querySelector('#email').value,
+                            year: document.querySelector('#year').value,
+                            program: document.querySelector('#program').value,
+                            regno: document.querySelector('#RegNo').value,
+                            phonenumber: document.querySelector('#ph').value,
+                            name: document.querySelector('#name').value
                         });
                         myform.reset();
                     } else {
@@ -251,6 +258,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

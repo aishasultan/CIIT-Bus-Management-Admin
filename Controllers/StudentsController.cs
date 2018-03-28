@@ -135,5 +135,28 @@ namespace testing.Controllers
                 return View();
             }
         }
+
+        // GET: Students/Views
+        public ActionResult Views()
+        {
+            return View();
+        }
+
+        // POST: Students/Views
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Views(IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

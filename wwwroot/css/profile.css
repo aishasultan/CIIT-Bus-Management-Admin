@@ -8,13 +8,13 @@
     min-height: 355px;
     display: inline-block;
     margin-top: 40px;
-    background: rgba(255, 255, 255, 0.5)!important;
+    /*background: rgba(255, 255, 255, 0.5)!important;*/
 }
 .profile-edit {
     min-height: 355px;
     display: inline-block;
     margin: 40px 20px 0 20px;
-    background: rgba(255, 255, 255, 0.5)!important;
+    /*background: rgba(255, 255, 255, 0.5)!important;*/
     width: 100%!important;
 }
 .ratings {
@@ -48,14 +48,7 @@ span.tags {
     font-weight: bold;
     padding: 2px 4px;
 }
-.dropdown-menu {
-/*    background-color: #34495e;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    width: 250px;
-    margin-left: -125px;
-    left: 50%;*/
-}
+
 .dropdown-menu .divider {
     background:none;
 }
@@ -110,7 +103,7 @@ span.tags {
     width: 100%;
     padding: 5px 0;
 }
-..profile-content > span{
+.profile-content > span{
     width: 100px;
 }
 .profile-content > i {
@@ -132,7 +125,8 @@ span.tags {
   
 
 }
-.dl-horizontal-profile dd:before{
-    content: ":";
-    padding-right: 20px;
+    .dl-horizontal-profile dd:before {
+        content: ":";
+        padding-right: 20px;
+    }
 

@@ -1,0 +1,158 @@
+﻿@model testing.Models.AdminManageModels.Notifications
+
+@{
+    ViewData["Title"] = "Notification";
+}
+<script src="~/js/site.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<h3>Notification</h3>
+<hr />
+        <form asp-action="Notification" id="myform">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+            <div class="dropdown">
+                <select name="menu" id="menu" class="selectpicker" data-width="250px">
+                    <option></option>
+                    <option id="menu1" onclick="setText">Buses will leave at 2:45 pm sharp</option>
+                    <option id="menu2" >Buses will not be coming today</option>
+                </select>
+
+            </div>
+
+            </div>
+
+            <div id="buses" class="form-group">
+                <div class="dropdown">
+                    <select name="bus" id="bus" class="selectpicker" data-width="100px">
+                        <option value="BUS1" id="bus1">Bus 1</option>
+                        <option value="BUS2" id="bus2">Bus 2</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">                
+                <textarea asp-for="notification" rows="8" id="notification" class="form-control" ></textarea>
+                <span asp-validation-for="notification" class="text-danger"></span>
+            </div>
+
+            <div class="checkbox" >
+                <label><input onclick="click" type="checkbox" name="students" id="students">Send to all Students</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="drivers" id="drivers">Send to all Drivers</label>
+            </div>
+            
+            
+            <div class="form-group">
+                <input type="button" id="submit" value="Send Notification" class="btn btn-default" onclick="click"/>
+            </div>
+
+        </form>
+
+<script>
+    $("#menu").change(function () { 
+
+        var selectedvalue = $(this).val();
+        console.log(selectedvalue);
+        //var x=  document.getElementById('#notification');
+        $('#notification').text(selectedvalue);
+
+    });
+    document.getElementById('menu').addEventListener("setText", function (event) {
+
+        console.log("im working");
+    }
+    );
+
+    // Get time and date
+    var dt = new Date();
+    var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+    console.log(dt);
+
+    // Get elements
+    var myform = document.getElementById('myform');
+
+    // Create Reference
+    var dbRef = firebase.database().ref().child('Notification');
+    var ref1 = dbRef.child('BusStudents');
+    var ref2 = dbRef.child('Drivers');
+    var ref3 = dbRef.child('AllStudents');
+    
+    ref1.on('value', snap => console.log(snap.val()));
+    $(document).ready(function () {
+        document.getElementById('students')
+            .addEventListener("click", function (event) {
+
+                if ($("#students").is(":checked")) {
+                    //$("#bus").attr("disabled", true);
+                    $("#bus").prop("readonly", true);
+                    $("#buses").hide();
+                } else {
+                    console.log("Not checked");
+                    $("#buses").show();
+                    $("#bus").prop("disabled", false);
+                }
+            });
+
+       // console.log($("#students").attr("checked"));
+       // console.log($("form #students").attr('checked', true)); 
+       // console.log($("#students").attr("checked"));
+      //  console.log($("form #students :checked"));
+        //$("students").click(function () {
+        //    $("students").hide();
+        //});
+        //console.log($("#bus option:selected").text());
+
+            document.getElementById('submit')
+                .addEventListener("click", function (event) {
+                  //  console.log($("#students").attr("checked"));
+                  //  console.log($("#students").text());
+                  //  console.log($("#students :checked"));  
+                    event.preventDefault();
+
+                    ref1.push({
+                        notification: document.querySelector('#notification').value,
+                        bus: $("#bus option:selected").text(),
+                        date: dt.toDateString(),
+                        time: time
+                    });
+
+                    if (document.querySelector('#notification').value != '') {
+                        if ($("#students").is(":checked")) {
+                            //$("#bus").prop("disabled", true);
+                            ref3.push({
+                                notification: document.querySelector('#notification').value,
+                                bus: $("#bus option:selected").text(),
+                                date: dt.toDateString(),
+                                time: time
+                            });
+
+                        } else {
+                            console.log("Not checked");
+
+                            //$("#bus").prop("disabled", true);
+                        }
+
+                        if ($("#drivers").is(":checked")) {
+                            ref2.push({
+                                notification: document.querySelector('#notification').value,
+                                bus: $("#bus option:selected").text(),
+                                date: dt.toDateString(),
+                                time: time
+                            });
+                        } else console.log("Not checked");
+                       
+                    } else {
+                        alert('Please fill atlease name or email!');
+                    }
+                }, false);
+        
+        });
+</script>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

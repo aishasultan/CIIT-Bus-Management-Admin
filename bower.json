@@ -8,6 +8,6 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "fullcalendar": "v3.9.0",
     "moment": "momentjs#2.21.0",
-    "print-js": "print.js#v1.0.33"
+    "jspdf": "v1.3.5"
   }
 }
