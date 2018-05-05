@@ -1,16 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace testing.Controllers
 {
+    //[Authorize]
+    [Route("[controller]/[action]")]
     public class RoutesController : Controller
     {
         // GET: Routes
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult test()
         {
             return View();
         }
@@ -25,6 +35,29 @@ namespace testing.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        // GET: Routes/Routes
+        public ActionResult Routes()
+        {
+            return View();
+        }
+
+        // POST: Routes/Routes/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Routes(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: Routes/Create

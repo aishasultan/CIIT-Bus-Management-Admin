@@ -5,7 +5,7 @@
 <h2>Registration Forms</h2>
 
 <div>
-    <input type="button" onclick="demoFromHTML()" class="btn btn-default" value="Download All" />
+    <input type="button" onclick="downloadForms()" class="btn btn-default" value="Download All" />
     <hr />
 </div>
 <div id="customers">
@@ -20,7 +20,6 @@
                 <th>Bus Stop</th>
                 <th>Bus Number</th>
                 <th>Delete</th>
-                <th>Download</th>
             </tr>
         </thead>
         <tbody id="detailsdata"></tbody>
@@ -71,14 +70,14 @@
         html += '<td>' + contact.stopName + '</td>';
         html += '<td>' + contact.busNumber + '</td>';
         html += '<td><button type="button" class="btn btn-default" onClick="del(\'' + ourKey + '\')">Delete</button></td>';
-        html += '<td><button type="button" class="btn btn-default" onClick="print(\'' + ourKey + '\')">Download</button></td>';
+        //html += '<td><button type="button" class="btn btn-default" onClick="print(\'' + ourKey + '\')">Download</button></td>';
         html += '</tr>';
         return html;
     }
 </script>
 
 <script>
-    function demoFromHTML() {
+    function downloadForms() {
         var pdf = new jsPDF('p', 'mm', 'b2');
         
         // source can be HTML-formatted string, or a reference
@@ -121,11 +120,6 @@
             }, margins);
     }
 </script>
-@*<script src="~/lib/print-js/src/index.js"></script>
-    <script src="~/lib/print-js/webpack.mix.js"></script>
-    <script src="~/lib/print-js/src/js/print.js"></script>
-    <script src="~/lib/print-js/src/js/pdf.js"></script>
-    <link rel="stylesheet" href="~/lib/print-js/src/css/print.css" />*@
 
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <script src="bower_components/jspdf/dist/jspdf.min.js"></script>

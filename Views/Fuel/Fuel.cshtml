@@ -1,0 +1,283 @@
+﻿@model testing.Models.AdminManageModels.Fuel
+
+@{
+    ViewData["Title"] = "Fuel";
+}
+
+<h2>Fuel</h2>
+<script src="~/lib/chart.js/dist/Chart.js"></script>
+<script src="~/js/site.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<style>
+    .table {
+        width: 25%;
+        margin: 0 auto !important;
+    }
+</style>
+
+<div id="buses" class="form-group">
+    <div class="dropdown">
+        <select name="bus" id="bus" class="selectpicker" data-width="100px">
+            <option value="1" id="bus1">Bus 1</option>
+            <option value="2" id="bus2">Bus 2</option>
+            <option value="3" id="bus3">Bus 3</option>
+            <option value="4" id="bus4">Bus 4</option>
+            <option value="5" id="bus5">Bus 5</option>
+            <option value="6" id="bus6">Bus 6</option>
+            <option value="7" id="bus7">Bus 7</option>
+        </select>
+    </div>
+</div>
+
+<div id="mode-selector" class="controls">
+    <input type="radio" name="type" id="day" checked="checked">
+    <label for="day">Per Day</label>
+
+    <input type="radio" name="type" id="week">
+    <label for="week">Per Week</label>
+
+    <input type="radio" name="type" id="month">
+    <label for="month">Per Month</label>
+</div>
+
+<div id="table">
+    <table class="table text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th rowspan="2" class="text-center">1 Day Record</th>
+            </tr>
+        </thead>
+        <tbody id="detailsdata"></tbody>
+    </table>
+</div>
+    <canvas id="myChart" width="50" height="50"></canvas>
+    
+    <script>
+
+        var busnumber;
+        fuelCosts = {}
+        var fuel;
+
+        var speed, fuelUsed, fuelCost, distance, time;
+        var dbRef = firebase.database().ref().child('Fuel');
+
+        //dbRef.once('value', function (snapshot) {
+        //    //fuel
+        //    var data = snapshot;
+        //    console.log(data.val());
+        //    fuel = data;
+        //    var i = 0;
+        //    fuel.forEach(function (fuelData) {
+        //        console.log(busnumber +"bus number");
+        //        console.log(fuelData.val().busnumber +"fuel data");
+        //        console.log(fuelData.key);
+        //        if (fuelData.val().busnumber ==1) {
+        //           // dbRef.child(fuelData.key).remove();
+                    
+        //            //speed = fuelData.val().speed;
+        //            //time = fuelData.val().TotalTime;
+        //            //fuelCost = fuelData.val().FuelCost;
+        //            //fuelUsed = fuelData.val().FuelConsumed;
+        //            //distance = fuelData.val().distanceCovered;
+        //            fuelCosts[i] = fuelData.val().FuelCost;
+        //            console.log(fuelCosts[i]);
+        //            console.log(fuelCosts);
+        //            i++;
+        //        }
+        //    });
+
+
+
+        //    var ctx = document.getElementById("myChart");
+        //    var myChart = new Chart(ctx, {
+        //        type: 'bar',
+        //        data: {
+        //            labels: ["DAY1", "DAY2", "DAY3", "DAY4", "DAY5", "DAY6", "DAY7"],
+        //            datasets: [{
+        //                label: "Cost of fuel consumed on respective day",
+        //                data: [fuelCosts[0], fuelCosts[1], fuelCosts[2], fuelCosts[3], fuelCosts[4], fuelCosts[5], fuelCosts[6]],
+        //                backgroundColor: [
+        //                    'rgba(255, 99, 132, 0.2)',
+        //                    'rgba(255, 99, 132, 0.2)',
+        //                    'rgba(255, 99, 132, 0.2)',
+        //                    'rgba(255, 99, 132, 0.2)',
+        //                    'rgba(255, 99, 132, 0.2)',
+        //                    'rgba(255, 99, 132, 0.2)',
+        //                    'rgba(255, 99, 132, 0.2)'
+
+        //                ],
+        //                borderColor: [
+        //                    'rgba(255,99,132,1)',
+        //                    'rgba(54, 162, 235, 1)',
+        //                    'rgba(255, 206, 86, 1)',
+        //                    'rgba(75, 192, 192, 1)',
+        //                    'rgba(153, 102, 255, 1)',
+        //                    'rgba(255, 159, 64, 1)'
+        //                ],
+        //                borderWidth: 0
+        //            }]
+        //        },
+        //        options: {
+        //            maintainAspectRatio: false,
+        //            scales: {
+        //                yAxes: [{
+        //                    ticks: {
+        //                        beginAtZero: true
+        //                    }
+        //                }]
+        //            }
+        //        }
+        //    });
+        //});
+
+        $("#bus").change(function () {
+         
+            var selectedvalue = $(this).val();
+            console.log(selectedvalue);
+            busnumber = selectedvalue;
+
+
+            dbRef.once('value', function (snapshot) {
+
+                var data = snapshot;
+                console.log(data.val());
+                fuel = data;
+                var i = 0;
+                fuel.forEach(function (fuelData) {
+                    if (fuelData.val().busnumber == busnumber && $("#day").attr('checked')) {
+
+                        console.log(fuelData.val().busnumber);
+                    
+                    $('#detailsdata').append([
+                        '<tr>',
+                        '<td>' + "Bus Number" + '</td>',
+                        '<td>' + fuelData.val().busnumber + '</td>',
+                        '</tr>',
+
+                        '<tr>',
+                        '<td>' + "Distance Covered" + '</td>',
+                        '<td>' + fuelData.val().distanceCovered + '</td>',
+                        '</tr>',
+
+                        '<tr>',
+                        '<td>' + "Fuel Cost" + '</td>',
+                        '<td>' + fuelData.val().FuelCost + '</td>',
+                        '</tr>',
+
+                        '<tr>',
+                        '<td>' + "Fuel Consumed" + '</td>',
+                        '<td>' + fuelData.val().FuelConsumed + '</td>',
+                        '</tr>',
+
+                        '<tr>',
+                        '<td>' + "Average Speed" + '</td>',
+                        '<td>' + fuelData.val().speed + '</td>',
+                        '</tr>',
+
+                        '<tr>',
+                        '<td>' + "Total Time" + '</td>',
+                        '<td>' + fuelData.val().TotalTime + '</td>',
+                        '</tr>',
+                    ].join('')
+                        );
+                    }
+
+
+                    if (fuelData.val().busnumber == busnumber && $("#week").attr('checked')){
+                        //fuel
+                        console.log(fuelData.val().speed + " speed");
+                        speed = fuelData.val().speed;
+                        time = fuelData.val().TotalTime;
+                        fuelCost = fuelData.val().FuelCost;
+                        fuelUsed = fuelData.val().FuelConsumed;
+                        distance = fuelData.val().distanceCovered;
+                        fuelCosts[i] = fuelData.val().FuelCost;
+                        console.log("fuelCosts[i] " + fuelCosts[i]);
+
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["DAY1", "DAY2", "DAY3", "DAY4", "DAY5", "DAY6", "DAY7"],
+                                datasets: [{
+                                    label: "Cost of fuel consumed on respective day",
+                                    data: [fuelCosts[0], fuelCosts[1], fuelCosts[2], fuelCosts[3], fuelCosts[4], fuelCosts[5], fuelCosts[6]],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)'
+
+                                    ],
+                                    borderColor: [
+                                        'rgba(255,99,132,1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 0
+                                }]
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    }
+                });
+
+                
+            });
+        });
+
+        function contactHtmlFromObject(key, contact) {
+
+            //console.log(contact.busnumber)
+
+            var ourKey = key;
+            console.log(ourKey);
+
+            var html = '<tr>';
+            html += '<td>' + "Bus Number" + '</td>';
+            html += '<td>' + contact.busnumber + '</td>';
+            html += '</tr>';
+
+            html += '<tr>';
+            html += '<td>' + "Distance Covered" + '</td>';
+            html += '<td>' + contact.distanceCovered + '</td>';
+            html += '</tr>';
+
+            html += '<tr>';
+            html += '<td>' + "Fuel Cost" + '</td>';
+            html += '<td>' + contact.FuelCost + '</td>';
+            html += '</tr>';
+
+            html += '<tr>';
+            html += '<td>' + "Fuel Consumed" + '</td>';
+            html += '<td>' + contact.FuelConsumed + '</td>';
+            html += '</tr>';
+
+            html += '<tr>';
+            html += '<td>' + "Speed" + '</td>';
+            html += '<td>' + contact.speed + '</td>';
+            html += '</tr>';
+
+            html += '<tr>';
+            html += '<td>' + "Total Time" + '</td>';
+            html += '<td>' + contact.TotalTime + '</td>';
+            html += '</tr>';
+            return html;
+        }
+    </script>

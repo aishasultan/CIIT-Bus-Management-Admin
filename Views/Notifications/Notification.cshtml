@@ -26,8 +26,14 @@
             <div id="buses" class="form-group">
                 <div class="dropdown">
                     <select name="bus" id="bus" class="selectpicker" data-width="100px">
-                        <option value="BUS1" id="bus1">Bus 1</option>
-                        <option value="BUS2" id="bus2">Bus 2</option>
+                        <option value="BUS1" id="bus1">1</option>
+                        <option value="BUS2" id="bus2">2</option>
+                        <option value="BUS3" id="bus3">3</option>
+                        <option value="BUS4" id="bus4">4</option>
+                        <option value="BUS5" id="bus5">5</option>
+                        <option value="BUS6" id="bus6">6</option>
+                        <option value="BUS7" id="bus7">7</option>
+                    
                     </select>
                 </div>
             </div>
@@ -56,7 +62,6 @@
 
         var selectedvalue = $(this).val();
         console.log(selectedvalue);
-        //var x=  document.getElementById('#notification');
         $('#notification').text(selectedvalue);
 
     });
@@ -96,20 +101,8 @@
                 }
             });
 
-       // console.log($("#students").attr("checked"));
-       // console.log($("form #students").attr('checked', true)); 
-       // console.log($("#students").attr("checked"));
-      //  console.log($("form #students :checked"));
-        //$("students").click(function () {
-        //    $("students").hide();
-        //});
-        //console.log($("#bus option:selected").text());
-
             document.getElementById('submit')
                 .addEventListener("click", function (event) {
-                  //  console.log($("#students").attr("checked"));
-                  //  console.log($("#students").text());
-                  //  console.log($("#students :checked"));  
                     event.preventDefault();
 
                     ref1.push({

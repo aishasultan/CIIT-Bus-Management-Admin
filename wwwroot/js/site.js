@@ -12,10 +12,6 @@ var config = {
 firebase.initializeApp(config);
 
 
-// Get elements
-//var object = document.getElementById('myform');
-//var list = document.getElementById('list');
-
 // Create Reference
 
 var dbRef = firebase.database().ref().child('Driver');
@@ -33,12 +29,12 @@ var dbList = dbRef.child('yIIYu6SFObWBur1XV5JOAjliO3A3');
 
 
 //Sync List changes
-dbList.on('child_added', snap => {
-    var li = document.createElement('li');
-    li.innerText = snap.val();
-    li.id = snap.key;
-    list.appendChild(li);
-});
+//dbList.on('child_added', snap => {
+//    var li = document.createElement('li');
+//    li.innerText = snap.val();
+//    li.id = snap.key;
+//    list.appendChild(li);
+//});
 
 //dbList.on('child_changed', snap => {
 

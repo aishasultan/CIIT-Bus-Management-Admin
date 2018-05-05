@@ -8,6 +8,8 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "fullcalendar": "v3.9.0",
     "moment": "momentjs#2.21.0",
-    "jspdf": "v1.3.5"
+    "jspdf": "v1.3.5",
+    "chart.js": "Chart.js#v2.7.2",
+    "marker-animate-unobtrusive": "v0.2.8"
   }
 }

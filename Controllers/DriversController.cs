@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace testing.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class DriversController : Controller
     {
         // GET: Drivers
+        
         public ActionResult Index()
         {
             return View();
@@ -51,6 +57,7 @@ namespace testing.Controllers
         }
 
         // POST: Drivers/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)

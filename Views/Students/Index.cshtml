@@ -3,9 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h2>Index</h2>
-
+<br />
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -64,7 +62,7 @@
 
     function edit(key) {
 
-        window.location.href = 'Students/edit?id=' + key;
+        window.location.href = 'edit?id=' + key;
         console.log(window.location.href);
     }
 
