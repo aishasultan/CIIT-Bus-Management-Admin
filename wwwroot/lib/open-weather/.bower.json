@@ -1,0 +1,39 @@
+{
+  "name": "open-weather",
+  "version": "2.0.0",
+  "homepage": "https://github.com/michael-lynch/open-weather",
+  "authors": [
+    "Michael Lynch <mikethomaslynch@gmail.com>"
+  ],
+  "description": "A simple, lightweight jQuery plugin used to display the current weather of any city using the free OpenWeatherMap API.",
+  "main": "src/openweather.js",
+  "keywords": [
+    "open",
+    "weather",
+    "temperature",
+    "wind",
+    "speed",
+    "humidity",
+    "sunset",
+    "sunrise",
+    "city"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.0",
+    "commit": "561d00175eb7a44488e1fd3a4495c2002d422057"
+  },
+  "_source": "https://github.com/michael-lynch/open-weather.git",
+  "_target": "2.0.0",
+  "_originalSource": "open-weather",
+  "_direct": true
+}

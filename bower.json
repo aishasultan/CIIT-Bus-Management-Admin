@@ -10,6 +10,7 @@
     "moment": "momentjs#2.21.0",
     "jspdf": "v1.3.5",
     "chart.js": "Chart.js#v2.7.2",
-    "marker-animate-unobtrusive": "v0.2.8"
+    "marker-animate-unobtrusive": "v0.2.8",
+    "open-weather": "2.0.0"
   }
 }

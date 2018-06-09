@@ -4,13 +4,15 @@
     ViewData["Title"] = "Notification";
 }
 <script src="~/js/site.js"></script>
-
+@*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/plugins/openWeather.js"></script>*@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <h3>Notification</h3>
 <hr />
         <form asp-action="Notification" id="myform">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="weatherResponse"></div>
             <div class="form-group">
             <div class="dropdown">
                 <select name="menu" id="menu" class="selectpicker" data-width="250px">
@@ -18,11 +20,8 @@
                     <option id="menu1" onclick="setText">Buses will leave at 2:45 pm sharp</option>
                     <option id="menu2" >Buses will not be coming today</option>
                 </select>
-
             </div>
-
             </div>
-
             <div id="buses" class="form-group">
                 <div class="dropdown">
                     <select name="bus" id="bus" class="selectpicker" data-width="100px">
@@ -56,8 +55,18 @@
             </div>
 
         </form>
-
+        
 <script>
+
+    // Create Reference
+    var dbRef = firebase.database().ref().child('Notification');
+    var ref0 = dbRef.child('Auto');
+    var ref1 = dbRef.child('BusStudents');
+    var ref2 = dbRef.child('Drivers');
+    var ref3 = dbRef.child('AllStudents');
+    var description;
+    var main;
+
     $("#menu").change(function () { 
 
         var selectedvalue = $(this).val();
@@ -65,32 +74,58 @@
         $('#notification').text(selectedvalue);
 
     });
-    document.getElementById('menu').addEventListener("setText", function (event) {
-
-        console.log("im working");
-    }
-    );
 
     // Get time and date
     var dt = new Date();
     var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
     console.log(dt);
 
+    // weather
+    var apiCall = 'https://api.openweathermap.org/data/2.5/weather?q=Islamabad,pk&appid=15ce115bef97dc31fe8c3545adf7dea6';
+    $.getJSON(apiCall, weatherCallback);
+
+    function weatherCallback(weatherData) {
+
+        var cityName = weatherData.name;
+        var country = weatherData.sys.country;
+        description = weatherData.weather[0].description;
+        main = weatherData.weather[0].main;
+        $('.weatherResponse').append("The weather in " + cityName + ", " + country + " is currently " + description);
+
+        console.log(weatherData);
+        console.log(weatherData.weather[0].description);
+        console.log(weatherData.main.pressure);
+    }
+
+    //$('#weatherResponse').change(function () {
+
+
+    //});
+
     // Get elements
     var myform = document.getElementById('myform');
 
-    // Create Reference
-    var dbRef = firebase.database().ref().child('Notification');
-    var ref1 = dbRef.child('BusStudents');
-    var ref2 = dbRef.child('Drivers');
-    var ref3 = dbRef.child('AllStudents');
-    
-    ref1.on('value', snap => console.log(snap.val()));
+    dbRef.on('value', snap => console.log(snap.val()));
     $(document).ready(function () {
+        
         document.getElementById('students')
             .addEventListener("click", function (event) {
 
                 if ($("#students").is(":checked")) {
+                    //$("#bus").attr("disabled", true);
+                    $("#bus").prop("readonly", true);
+                    $("#buses").hide();
+                } else {
+                    console.log("Not checked");
+                    $("#buses").show();
+                    $("#bus").prop("disabled", false);
+                }
+            });
+
+        document.getElementById('drivers')
+            .addEventListener("click", function (event) {
+
+                if ($("#drivers").is(":checked")) {
                     //$("#bus").attr("disabled", true);
                     $("#bus").prop("readonly", true);
                     $("#buses").hide();
@@ -117,7 +152,7 @@
                             //$("#bus").prop("disabled", true);
                             ref3.push({
                                 notification: document.querySelector('#notification').value,
-                                bus: $("#bus option:selected").text(),
+                            //    bus: $("#bus option:selected").text(),
                                 date: dt.toDateString(),
                                 time: time
                             });
@@ -131,7 +166,7 @@
                         if ($("#drivers").is(":checked")) {
                             ref2.push({
                                 notification: document.querySelector('#notification').value,
-                                bus: $("#bus option:selected").text(),
+                              //  bus: $("#bus option:selected").text(),
                                 date: dt.toDateString(),
                                 time: time
                             });

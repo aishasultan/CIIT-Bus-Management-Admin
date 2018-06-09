@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,13 +147,13 @@
         </div>
         <div class="row">
             <div id="mode-selector" class="controls">
-                <input type="radio" name="type" id="changemode-walking" checked="checked">
+                <input type="radio" name="type" id="changemode-walking">
                 <label for="changemode-walking">Walking</label>
 
                 <input type="radio" name="type" id="changemode-transit">
                 <label for="changemode-transit">Transit</label>
 
-                <input type="radio" name="type" id="changemode-driving">
+                <input type="radio" name="type" id="changemode-driving" checked = "checked">
                 <label for="changemode-driving">Driving</label>
             </div>
             <div id="map"></div>
@@ -163,7 +164,8 @@
         var dbRef = firebase.database().ref().child('Routes');
         var counter = 1;
         var i = 0;
-        var startTime = new Date().getTime();
+        var dt = new Date();
+        var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
 
         function initMap() {
             latlng = { lat: 33.6500053, lng: 73.1556737 };
@@ -175,13 +177,6 @@
             });
 
             new AutocompleteDirectionsHandler(map);
-            //dbRef.push({
-            //    busnumber: document.querySelector('#bus').value,
-            //    source: document.querySelector('#origin-input').value,
-            //    destination: document.querySelector('#destination-input').value,
-            //    waypoints: document.querySelector('#way-points').value
-            //});
-            //console.log(dbRef.push);
         }
 
         function addInput(divName) {
@@ -203,10 +198,11 @@
         function AutocompleteDirectionsHandler(map) {
             this.map = map;
             this.originPlaceId = null;
+            this.originLatlng = null;
             this.destinationPlaceId = null;
             this.waypointPlaceId = null;
             this.newWaypointPlaceId = null;
-            this.travelMode = 'WALKING';
+            this.travelMode = 'DRIVING';
             var originInput = document.getElementById('origin-input');
             var destinationInput = document.getElementById('destination-input');
             var waypointInput = document.getElementsByName('waypoints');
@@ -232,7 +228,7 @@
             this.setupClickListener('changemode-driving', 'DRIVING');
 
             this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-            this.setupPlaceChangedListener(waypointAutocomplete, 'DEST');
+            this.setupPlaceChangedListener(waypointAutocomplete, 'DEST1');
             this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
 
             this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
@@ -301,15 +297,25 @@
                 optimizeWaypoints: true,
                 destination: { 'placeId': this.destinationPlaceId },
                 travelMode: this.travelMode
-                
+
             }, function (response, status) {
                 if (status === 'OK') {
                     me.directionsDisplay.setDirections(response);
                     console.log("OK");
-                    
+
+                    dbRef.push({
+                        busnumber: $("#bus option:selected").text(),
+                        routeNumber: document.querySelector('#route').value,
+                        source: document.querySelector('#origin-input').value,
+                        destination: document.querySelector('#destination-input').value,
+                        waypoints: waypts,
+                        date: dt.toDateString(),
+                        time: time
+                    });
+                    console.log(dbRef.push);
+
                 } else {
                     window.alert('Directions request failed due to ' + status);
-
                 } 
              });
             

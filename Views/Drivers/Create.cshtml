@@ -32,6 +32,12 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" id="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label"></label>
                 <input asp-for="PhoneNumber" id="ph" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
@@ -66,11 +72,11 @@
                         || document.querySelector('#email').value != '') {
                         dbRef.push({
 
-                            BusNumber: document.querySelector('#bus').value,
-                            Email: document.querySelector('#email').value,
-                        //    password: document.querySelector('#password').value,
-                            PhoneNumber: document.querySelector('#ph').value,
-                            Name: document.querySelector('#name').value
+                            busnumber: document.querySelector('#bus').value,
+                            email: document.querySelector('#email').value,
+                            password: document.querySelector('#password').value,
+                            phonenumber: document.querySelector('#ph').value,
+                            name: document.querySelector('#name').value
                            });
                         myform.reset();
                     } else {

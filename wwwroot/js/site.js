@@ -20,6 +20,7 @@ var clicks = firebase.database().ref().child('DriverLocation');
 var dbRef3 = firebase.database().ref().child('Feedback');
 
 var dbList = dbRef.child('yIIYu6SFObWBur1XV5JOAjliO3A3');
+console.log(dbList);
 
 
 //Sync object changes
