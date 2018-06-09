@@ -14,7 +14,7 @@ namespace testing.Services
     {
         public Task SendEmailAsync(string email, string subject, string body)
         {
-            var fromAddress = new MailAddress("ash.sultan428@gmail.com", "Aisha Sultan");
+            var fromAddress = new MailAddress("myemail", "Aisha Sultan");
             var toAddress = new MailAddress(email);
             var mail = new MailMessage(fromAddress, toAddress)
             {
@@ -37,7 +37,7 @@ namespace testing.Services
             using (var client = new SmtpClient("smtp.gmail.com", 587)
             {
                 EnableSsl = true,
-                Credentials = new NetworkCredential(fromAddress.Address, "AAshu_428")
+                Credentials = new NetworkCredential(fromAddress.Address, "password")
             })
             {
                 client.Send(mail);
